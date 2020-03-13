@@ -23,7 +23,7 @@ for i in range(len(data)):
     gvec_matrix.append(vector)
 
 
-outputfile = "./stsim_m_fea_2.txt"
+outputfile = "./stsim_m_fea.txt"
 with open(outputfile, 'w+') as f:
     for k in range(len(gidlist)):
         line1 = str(gidlist[k]) + ' '
