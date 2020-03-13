@@ -4,11 +4,11 @@ import os
 import glob
 import heapq
 import time
+from torch.utils.data import Dataset, DataLoader
 
 data_dir = "/Users/yuxiao/Desktop/data/Corbis128BigExperiment_gray/"
 data = glob.glob(data_dir + "*.tiff")
-#-------------------------------------
-from torch.utils.data import Dataset, DataLoader
+
 
 class ImgData(Dataset):
 
@@ -30,13 +30,10 @@ class ImgData(Dataset):
         sample = score
         return sample
 
+    
 def del_path(s):
     (_, temp) = os.path.split(s)
     return temp
-
-
-def takesecond(elem):
-    return elem[1]
 
 
 m = Metric()
@@ -45,7 +42,6 @@ knum = 10
 
 t1 = time.time()
 for k in range(len(data)):
-#for k in range(2):
     tmp = []
     score = []
     img1name = del_path(data[k])
@@ -70,12 +66,12 @@ for k in range(len(data)):
     tmp.extend(score)
     res.append(tmp)
 
-    if k and k%99 == 0:
+    if k and k%255 == 0:
         print("%d images done"%(k+1))
 t2 = time.time()
 print("time cost: %f s"%(t2-t1))
 print(res)
-#-----------------------------------------
+
 outputfile = "./stsim_1_result.txt"
 with open(outputfile, 'w+') as f:
     for i in range(len(res)):
